@@ -1,4 +1,4 @@
--- 初始化TABLE,重建demo data
+-- 初始化TABLE
 DROP TABLE IF EXISTS book;
 
 CREATE TABLE book (
