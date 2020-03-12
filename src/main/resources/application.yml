@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/spring_boot_example
+    username: work
+    password: 123qweas
+    hikari:
+      auto-commit: true
+      connection-test-query: select 1
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      minimum-idle: 40
+      maximum-pool-size: 64
+    sql-script-encoding: utf-8
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
