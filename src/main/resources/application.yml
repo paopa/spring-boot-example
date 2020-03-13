@@ -19,3 +19,7 @@ spring:
       - classpath:sql/import.sql
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+#  security:
+#    user:
+#      name: admin
+#      password: admin

@@ -2,10 +2,7 @@ package pers.paopa.springboot.demo.controller.auth;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pers.paopa.springboot.demo.controller.auth.dio.LoginInputEntity;
 import pers.paopa.springboot.demo.controller.auth.dio.RegisterInputEntity;
 import pers.paopa.springboot.demo.controller.auth.dto.LoginDtoEntity;
@@ -36,4 +33,8 @@ public class AuthenticationController {
     }
 
     //get all user info with auth
+//    @GetMapping(value = "getAllUsers")
+//    public List<UserDtoEntity> getAllUsers(){
+//        return null;
+//    }
 }
