@@ -19,8 +19,9 @@ public class LoginService {
         UserDaoEntity user = userRepository.findByAccountAndPassword(account,password);
         LoginDtoEntity loginDtoEntity = new LoginDtoEntity();
         if(user != null) {
+            String accessToken = "qweasdzxxc";
             loginDtoEntity.setAccount(account);
-            loginDtoEntity.setToken("qwe");
+            loginDtoEntity.setToken(accessToken);
             return loginDtoEntity;
         }
         return null;

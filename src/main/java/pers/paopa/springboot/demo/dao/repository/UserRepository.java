@@ -8,4 +8,6 @@ import pers.paopa.springboot.demo.dao.entity.UserDaoEntity;
 public interface UserRepository extends JpaRepository<UserDaoEntity,Integer> {
 
     UserDaoEntity findByAccountAndPassword(String account, String password);
+
+    UserDaoEntity findByName(String username);
 }
