@@ -14,9 +14,9 @@ spring:
       maximum-pool-size: 64
     sql-script-encoding: utf-8
     initialization-mode: never
-    schema:
-      - classpath:sql/schema.sql
-      - classpath:sql/import.sql
+#    schema:
+#      - classpath:sql/schema.sql
+#      - classpath:sql/import.sql
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 #  security:

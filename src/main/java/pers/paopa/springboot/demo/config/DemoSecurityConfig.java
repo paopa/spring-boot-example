@@ -12,14 +12,18 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .cors()
+                .and()
+                .csrf().disable()
                 .authorizeRequests()
-                .antMatchers(POST,"/auth/register","auth/login").permitAll()
-                .anyRequest().authenticated();
+                .antMatchers(POST,"/auth/register").permitAll()
+                .antMatchers(POST,"/auth/login").permitAll()
+                .anyRequest().authenticated()
+                ;
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         super.configure(auth);
     }
-
 }
