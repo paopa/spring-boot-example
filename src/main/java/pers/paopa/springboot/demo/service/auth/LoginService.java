@@ -1,5 +1,6 @@
 package pers.paopa.springboot.demo.service.auth;
 
+import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pers.paopa.springboot.demo.controller.auth.dio.LoginInputEntity;
@@ -19,9 +20,9 @@ public class LoginService {
         UserDaoEntity user = userRepository.findByAccountAndPassword(account,password);
         LoginDtoEntity loginDtoEntity = new LoginDtoEntity();
         if(user != null) {
-            String accessToken = "qweasdzxxc";
+
             loginDtoEntity.setAccount(account);
-            loginDtoEntity.setToken(accessToken);
+
             return loginDtoEntity;
         }
         return null;
