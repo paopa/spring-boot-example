@@ -33,3 +33,8 @@ spring:
       mail.smtp.socketFactory.port: 465
       mail.smtp.socketFactory.class: javax.net.ssl.SSLSocketFactory
       mail.smtp.socketFactory.fallback: false
+#  freemarker:
+#      recognize_standard_file_extensions: true
+#      classpath: /templates
+#    content-type: text/html
+#    suffix: .html

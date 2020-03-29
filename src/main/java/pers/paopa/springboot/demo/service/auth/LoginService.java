@@ -14,17 +14,33 @@ public class LoginService {
 
     private final UserRepository userRepository;
 
-    public LoginDtoEntity request(LoginInputEntity loginInputEntity) {
-        String account = loginInputEntity.getAccount();
-        String password = loginInputEntity.getPassword();
-        UserDaoEntity user = userRepository.findByAccountAndPassword(account,password);
-        LoginDtoEntity loginDtoEntity = new LoginDtoEntity();
-        if(user != null) {
-
-            loginDtoEntity.setAccount(account);
-
-            return loginDtoEntity;
+    public LoginDtoEntity request(LoginInputEntity loginInput) throws Exception {
+        UserDaoEntity user = getUserData(loginInput);
+        if (user != null) {
+            return responseData(user);
+        } else {
+            throw new Exception("user not exist");
         }
+    }
+
+
+    private LoginDtoEntity responseData(UserDaoEntity user) {
+        LoginDtoEntity loginDtoEntity = new LoginDtoEntity();
+        String accessToken = createJWT(user);
+        loginDtoEntity.setAccount(user.getAccount());
+        loginDtoEntity.setToken(accessToken);
+        return loginDtoEntity;
+    }
+
+    private String createJWT(UserDaoEntity user) {
+//        return Jwts.builder()
+//                .setSubject()
+//                .compact();
         return null;
+    }
+
+
+    private UserDaoEntity getUserData(LoginInputEntity loginInput) {
+        return userRepository.findByAccountAndPassword(loginInput.getAccount(), loginInput.getPassword());
     }
 }

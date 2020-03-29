@@ -1,10 +1,8 @@
 package pers.paopa.springboot.demo.config.security;
 
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import pers.paopa.springboot.demo.service.auth.UserAuthenticationService;
 
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
@@ -23,7 +21,6 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTLoginFilter(authenticationManager()))
-//                .addFilter(new JWTAuthenticationFilter(authenticationManager()))
                 ;
     }
 

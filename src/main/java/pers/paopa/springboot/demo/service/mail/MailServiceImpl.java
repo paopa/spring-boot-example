@@ -1,12 +1,19 @@
 package pers.paopa.springboot.demo.service.mail;
 
+import freemarker.template.Template;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
-@Service
+import javax.mail.internet.MimeMessage;
+import java.util.Map;
+
+@Service("MailServiceImpl")
 public class MailServiceImpl {
 
     @Autowired
@@ -23,25 +30,23 @@ public class MailServiceImpl {
         message.setSubject(subject);
         message.setText(text);
 
-//        Context context = new Context();
-//        context.setVariable("project", "demo");
-//        context.setVariable("author", "yimcarson");
-//        context.setVariable("code", text);
-//        String emailContent = templateEngine.process("mail", context);
-//
-//        MimeMessage message = mailSender.createMimeMessage();
-//        MimeMessageHelper helper = null;
-//        try {
-//            helper = new MimeMessageHelper(message, true);
-//            helper.setFrom(from);
-//            helper.setTo(to);
-//            helper.setSubject(subject);
-//            helper.setText(emailContent, true);
-//        } catch (MessagingException e) {
-//            e.printStackTrace();
-//        }
-
         mailSender.send(message);
     }
 
+    @Autowired
+    private FreeMarkerConfigurer freeMarkerConfigurer;
+
+    public void sendTemplateFreemarker(
+            String to, String subject,
+            Map<String, Object> model, String templateFile) throws Exception {
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+        helper.setFrom(from);
+        helper.setTo(to);
+        helper.setSubject(subject);
+        Template template = freeMarkerConfigurer.getConfiguration().getTemplate(templateFile);
+        String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
+        helper.setText(html, true);
+        mailSender.send(message);
+    }
 }

@@ -14,33 +14,30 @@ import pers.paopa.springboot.demo.service.auth.RegisterService;
 import java.util.List;
 
 @RestController
-@RequestMapping(value ="/auth")
+@RequestMapping(value = "/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {
 
     private final RegisterService registerService;
 
-    //create user
     @PostMapping(value = "register")
     public ResponseEntity register(
-            @RequestBody RegisterInputEntity registerInputEntity){
+            @RequestBody RegisterInputEntity registerInputEntity) {
         return registerService.request(registerInputEntity);
     }
 
-    private final LoginService loginService;
-
-    //login
-    @PostMapping(value = "login")
-    public LoginDtoEntity login(
-            @RequestBody LoginInputEntity loginInputEntity){
-        return loginService.request(loginInputEntity);
-    }
+//    private final LoginService loginService;
+//
+//    @PostMapping(value = "login")
+//    public LoginDtoEntity login(
+//            @RequestBody LoginInputEntity loginInputEntity) {
+//        return loginService.request(loginInputEntity);
+//    }
 
     private final AllUsersInfoService allUsersInfoService;
 
-    //get all user info with auth
     @GetMapping(value = "getAllUsers")
-    public List<UserDaoEntity> getAllUsers(){
+    public List<UserDaoEntity> getAllUsers() {
         return allUsersInfoService.request();
     }
 }
