@@ -8,11 +8,11 @@ import javax.validation.constraints.NotEmpty;
 public class RegisterInputEntity {
 
     @NotEmpty
-    private String account;
+    private String name;
 
     @NotEmpty
     private String password;
 
     @NotEmpty
-    private String name;
+    private String email;
 }

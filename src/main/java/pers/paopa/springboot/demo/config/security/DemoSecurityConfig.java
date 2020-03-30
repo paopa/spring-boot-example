@@ -3,6 +3,7 @@ package pers.paopa.springboot.demo.config.security;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.logout.LogoutFilter;
 
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
@@ -20,8 +21,9 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(GET,"/auth/getAllUsers").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .addFilter(new JWTLoginFilter(authenticationManager()))
+//                .addFilter(new JWTLoginFilter(authenticationManager()))
                 ;
+
     }
 
 //    @Override

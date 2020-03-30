@@ -26,13 +26,14 @@ public class AuthenticationController {
         return registerService.request(registerInputEntity);
     }
 
-//    private final LoginService loginService;
-//
-//    @PostMapping(value = "login")
-//    public LoginDtoEntity login(
-//            @RequestBody LoginInputEntity loginInputEntity) {
-//        return loginService.request(loginInputEntity);
-//    }
+    private final LoginService loginService;
+
+    @PostMapping(value = "login")
+    public LoginDtoEntity login(
+            @RequestBody LoginInputEntity loginInputEntity)
+            throws Exception {
+        return loginService.request(loginInputEntity);
+    }
 
     private final AllUsersInfoService allUsersInfoService;
 

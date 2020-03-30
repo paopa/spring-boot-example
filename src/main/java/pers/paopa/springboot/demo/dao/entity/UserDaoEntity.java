@@ -3,6 +3,7 @@ package pers.paopa.springboot.demo.dao.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Data
 @Entity
@@ -10,9 +11,30 @@ import javax.persistence.*;
 public class UserDaoEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String account;
-    private String password;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "encrypted_pwd")
+    private String password;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "create_date")
+    private Date createDate;
+
+    @Column(name = "update_date")
+    private Date updateDate;
+
+    @Column(name = "active")
+    private boolean active;
+
+    @Column(name = "create_by")
+    private Integer createBy;
+
+    @Column(name = "update_by")
+    private Integer updateBy;
 }
