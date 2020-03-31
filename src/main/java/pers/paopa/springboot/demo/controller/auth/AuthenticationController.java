@@ -13,14 +13,14 @@ import pers.paopa.springboot.demo.service.auth.RegisterService;
 
 import java.util.List;
 
-@RestController
+@RestController("AuthenticationController")
 @RequestMapping(value = "/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {
 
     private final RegisterService registerService;
 
-    @PostMapping(value = "register")
+    @PostMapping(value = "/register")
     public ResponseEntity register(
             @RequestBody RegisterInputEntity registerInputEntity) {
         return registerService.request(registerInputEntity);
@@ -28,7 +28,7 @@ public class AuthenticationController {
 
     private final LoginService loginService;
 
-    @PostMapping(value = "login")
+    @PostMapping(value = "/login")
     public LoginDtoEntity login(
             @RequestBody LoginInputEntity loginInputEntity)
             throws Exception {
@@ -37,7 +37,7 @@ public class AuthenticationController {
 
     private final AllUsersInfoService allUsersInfoService;
 
-    @GetMapping(value = "getAllUsers")
+    @GetMapping(value = "/getAllUsers")
     public List<UserDaoEntity> getAllUsers() {
         return allUsersInfoService.request();
     }

@@ -88,6 +88,18 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- Gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+            <scope>true</scope>
+        </dependency>
 
     </dependencies>
 
@@ -96,6 +108,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>false</fork>
+                </configuration>
             </plugin>
         </plugins>
     </build>

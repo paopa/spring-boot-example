@@ -1,15 +1,20 @@
 package pers.paopa.springboot.demo.config.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.authentication.logout.LogoutFilter;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 
 @EnableWebSecurity
 public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private CustomAuthenticationProvider customAuthenticationProvider;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -18,16 +23,15 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers(POST,"/auth/register","/auth/login").permitAll()
-                .antMatchers(GET,"/auth/getAllUsers").permitAll()
                 .anyRequest().authenticated()
                 .and()
-//                .addFilter(new JWTLoginFilter(authenticationManager()))
+                .addFilterBefore(new LoginFilter("/auth/login",authenticationManager()), UsernamePasswordAuthenticationFilter.class)
                 ;
 
     }
 
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(new UserAuthenticationService());
-//    }
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.authenticationProvider(customAuthenticationProvider);
+    }
 }

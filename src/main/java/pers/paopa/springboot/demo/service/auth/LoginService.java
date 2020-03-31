@@ -11,7 +11,7 @@ import pers.paopa.springboot.demo.dao.repository.UserRepository;
 
 import static pers.paopa.springboot.demo.config.security.SecurityConfiguration.*;
 
-@Service
+@Service("LoginService")
 @RequiredArgsConstructor
 public class LoginService {
 
@@ -28,13 +28,13 @@ public class LoginService {
 
     private LoginDtoEntity responseData(UserDaoEntity user) {
         LoginDtoEntity loginDtoEntity = new LoginDtoEntity();
-        String accessToken = createJWT(user);
+        String accessToken = createJWT();
         loginDtoEntity.setAccount(user.getName());
         loginDtoEntity.setToken(accessToken);
         return loginDtoEntity;
     }
 
-    private String createJWT(UserDaoEntity user) {
+    private String createJWT() {
         return Jwts.builder()
                 .setSubject(ACCESS_SUBJECT)
                 .signWith(SignatureAlgorithm.HS512, ACCESS_SIGN.getBytes())

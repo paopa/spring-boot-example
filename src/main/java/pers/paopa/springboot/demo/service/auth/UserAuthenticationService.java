@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import pers.paopa.springboot.demo.dao.entity.UserDaoEntity;
 import pers.paopa.springboot.demo.dao.repository.UserRepository;
 
-@Component
+@Component("UserAuthenticationService")
 public class UserAuthenticationService implements UserDetailsService {
 
     @Autowired
@@ -16,10 +16,13 @@ public class UserAuthenticationService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
         UserDaoEntity user = userRepository.findByName(username);
+
         if(user.getName() == null){
             throw new UsernameNotFoundException("Username "+username+" not found");
         }
-        return null;
+
+        return user;
     }
 }
