@@ -2,18 +2,16 @@ package pers.paopa.springboot.demo.dao.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
 @Table(name="book")
-public class BookDaoEntity {
+public class BookDaoEntity{
     @Id
     @GeneratedValue
-    private Integer bookid;
+    @Column(name = "bookid")
+    private Integer bookId;
     private String name;
     private String author;
 }

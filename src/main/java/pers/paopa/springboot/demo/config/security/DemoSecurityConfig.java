@@ -23,9 +23,10 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers(POST,"/auth/register","/auth/login").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .addFilterBefore(new LoginFilter("/auth/login",authenticationManager()), UsernamePasswordAuthenticationFilter.class)
+                .anyRequest().permitAll()
+//                .anyRequest().authenticated()
+//                .and()
+//                .addFilterBefore(new LoginFilter("/auth/login",authenticationManager()), UsernamePasswordAuthenticationFilter.class)
                 ;
 
     }
