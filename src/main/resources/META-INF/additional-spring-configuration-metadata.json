@@ -1,8 +1,0 @@
-{
-  "properties": [
-    {
-      "name": "spring.freemarker.template-loader-path.classpath",
-      "type": "java.lang.String",
-      "description": "Description for spring.freemarker.template-loader-path.classpath."
-  }
-] }
