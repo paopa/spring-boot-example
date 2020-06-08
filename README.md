@@ -9,12 +9,12 @@
 
 ## Project Structure
 - project
-    - README
-    ``` 撰寫本專案資訊 ```
+    - README.md
+    ``` 撰寫本專案相關資訊 ```
     - src
         - main
             - java
-                - per.david.demo
+                - per.david.demo 
                     - Application.java
                     ``` spring boot 啟動的 main function ```
                     - configuration
@@ -24,7 +24,7 @@
                     - service
                     ``` API 商務邏輯服務 ```
                     - util
-                    ``` 靜態的工具 ```
+                    ``` 工具類 ```
                     - worker
                     ``` 常用功能的實作 ```
             - resource
