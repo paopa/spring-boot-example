@@ -1,27 +1,68 @@
 package per.david.demo.worker.websocket;
 
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.socket.WebSocketSession;
+import org.springframework.stereotype.Component;
 
-import java.util.concurrent.ConcurrentHashMap;
+import javax.websocket.OnClose;
+import javax.websocket.OnMessage;
+import javax.websocket.OnOpen;
+import javax.websocket.Session;
+import javax.websocket.server.PathParam;
+import javax.websocket.server.ServerEndpoint;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.CopyOnWriteArraySet;
 
-@Slf4j
+@Component("webSocketWorker")
+@ServerEndpoint("/websocket/{shopId}")
+//此注解相当于设置访问URL
 public class WebSocketWorker {
-    private static ConcurrentHashMap<String, WebSocketSession> manager = new ConcurrentHashMap<String, WebSocketSession>();
 
-    public static void add(String key, WebSocketSession webSocketSession) {
-        log.info("新添加webSocket连接 {} ", key);
-        manager.put(key, webSocketSession);
+    private Session session;
+
+    private static CopyOnWriteArraySet<WebSocketWorker> webSockets = new CopyOnWriteArraySet<>();
+    private static Map<String, Session> sessionPool = new HashMap<String, Session>();
+
+    @OnOpen
+    public void onOpen(Session session, @PathParam(value = "shopId") String shopId) {
+        this.session = session;
+        webSockets.add(this);
+        sessionPool.put(shopId, session);
+        System.out.println("【websocket消息】有新的连接，总数为:" + webSockets.size());
     }
 
-    public static void remove(String key) {
-        log.info("移除webSocket连接 {} ", key);
-        manager.remove(key);
+    @OnClose
+    public void onClose() {
+        webSockets.remove(this);
+        System.out.println("【websocket消息】连接断开，总数为:" + webSockets.size());
     }
 
-    public static WebSocketSession get(String key) {
-        log.info("获取webSocket连接 {}", key);
-        return manager.get(key);
+    @OnMessage
+    public void onMessage(String message) {
+        System.out.println("【websocket消息】收到客户端消息:" + message);
+    }
+
+    // 此为广播消息
+    public void sendAllMessage(String message) {
+        for (WebSocketWorker webSocket : webSockets) {
+            System.out.println("【websocket消息】广播消息:" + message);
+            try {
+                webSocket.session.getAsyncRemote().sendText(message);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    // 此为单点消息
+    public void sendOneMessage(String shopId, String message) {
+        Session session = sessionPool.get(shopId);
+        if (session != null) {
+            try {
+                session.getAsyncRemote().sendText(message);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }
