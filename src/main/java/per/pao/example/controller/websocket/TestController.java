@@ -1,13 +1,13 @@
-package per.david.demo.controller.websocket;
+package per.pao.example.controller.websocket;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import per.david.demo.worker.websocket.WebSocketWorker;
+import per.pao.example.worker.websocket.WebSocketWorker;
 
-@RestController
 @RequestMapping("api")
 @RequiredArgsConstructor
+@RestController("TestController")
 public class TestController {
 
     private final WebSocketWorker webSocket;

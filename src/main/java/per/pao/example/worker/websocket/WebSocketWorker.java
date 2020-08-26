@@ -1,4 +1,4 @@
-package per.david.demo.worker.websocket;
+package per.pao.example.worker.websocket;
 
 import org.springframework.stereotype.Component;
 
