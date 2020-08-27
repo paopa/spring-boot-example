@@ -16,9 +16,12 @@ public class SimpleAsyncTest {
     private SimpleAsyncService simpleAsyncService;
 
     @Test
-    public void testThread() {
-        for (int i = 0; i < 100; i++) {
+    public void testThread() throws InterruptedException {
+        for (int i = 0; i < 18; i++) {
             simpleAsyncService.executeAsync(i);
+        }
+        for (int i = 0; i < 18; i++) {
+            simpleAsyncService.executeAsyncTwo(i);
         }
     }
 }
