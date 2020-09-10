@@ -9,13 +9,9 @@ import org.springframework.stereotype.Service;
 public class SimpleAsyncService {
 
     @Async(value = "simpleAsyncExecutor")
-    public void executeAsync(Integer i){
-        log.info("Async Test：{}" , i);
-    }
-
-    @Async(value = "simpleTwoAsyncExecutor")
-    public void executeAsyncTwo(Integer i){
-        log.info("Async Test Two：{}" , i);
+    public void execute(Integer i) throws InterruptedException {
+        log.info("Async Test：{} ", i);
+        Thread.sleep(1000);
     }
 
 }

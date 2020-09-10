@@ -25,18 +25,6 @@ public class SimpleAsyncTaskExecutorConfiguration implements AsyncConfigurer {
         return executor;
     }
 
-    @Bean(name = "simpleTwoAsyncExecutor")
-    public Executor getTwoAsyncExecutor() {
-        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(16);
-        executor.setMaxPoolSize(16);
-        executor.setQueueCapacity(2);
-        executor.setKeepAliveSeconds(1000);
-        executor.initialize();
-        return executor;
-    }
-
-
     @Override
     public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
         return null;
