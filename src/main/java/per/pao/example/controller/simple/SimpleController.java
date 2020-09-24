@@ -17,8 +17,8 @@ import java.util.List;
 import java.util.Map;
 
 @Api(tags = "Simple")
-@RestController
 @RequestMapping(value = "/api")
+@RestController("SimpleController")
 public class SimpleController {
 
     @GetMapping
@@ -38,3 +38,4 @@ public class SimpleController {
         return simpleRepository.findAll();
     }
 }
+

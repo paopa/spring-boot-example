@@ -1,6 +1,6 @@
 # Spring Boot Framework Demo
-> @author: david.wang \
-> @log: 2020.06.07
+> @author: poa.s.w \
+> @log: 2020.09.24
 ---
 
 ## 目的
@@ -21,10 +21,15 @@
                     ``` 功能設定檔物件```
                     - controller
                     ``` API 控制器物件```
-                    - service
-                    ``` API 商務邏輯服務物件```
+                        - service
+                        ``` API 商務邏輯服務物件```
                     - dao
                     ``` 對 database 操作的物件```
+                        - jpa
+                    - entity
+                    ``` 存放 database 傳出資料的物件 ```
+                    - enums
+                    ``` enumerate 類型的物件 ```
                     - util
                     ``` 工具類物件 ```
                     - worker
@@ -33,11 +38,11 @@
                 - application.yml
                 ``` yaml file 主要放置本專案相關的配置文件或設定檔 ```
         - test
-            - java
+            ``` test case ```
     - target
     ``` compiler 過後檔案輸出位置 ```
     - pom.xml
-    ``` 用以放置 maven project 配置檔，或須引入的liberary 配置檔 ```
+    ``` 用以放置 maven project 配置檔，或須引入的 liberary 配置檔 ```
     - .gitignore
     ``` 配置不上 git 的檔案名稱或類型 ```
 ---

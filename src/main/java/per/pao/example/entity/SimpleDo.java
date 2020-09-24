@@ -2,10 +2,7 @@ package per.pao.example.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -13,10 +10,13 @@ import javax.persistence.Table;
 public class SimpleDo {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id",columnDefinition = "serial")
     private Long id;
 
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "age")
     private Integer age;
 }
