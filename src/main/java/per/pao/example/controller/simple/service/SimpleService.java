@@ -17,8 +17,12 @@ public class SimpleService {
     public SimpleDo getSimpleDo() {
         log.info("time: {}", count);
         count++;
-        Double.parseDouble("#$%#");
+        recoverDemo();
         return new SimpleDo();
+    }
+
+    private void recoverDemo() {
+        Double.parseDouble("#$%#");
     }
 
     @Recover

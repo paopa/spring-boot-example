@@ -1,23 +1,30 @@
 server:
   port: 8080
 spring:
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/workspace
-    sql-script-encoding: UTF-8
-    username: workspace
-    password: 123qweas
-#  jpa:
-#    hibernate:
-#      ddl-auto: validate
-#    database: postgresql
-#    show-sql: true
-#    properties:
-#      hibernate:
-#        dialect: org.hibernate.dialect.PostgreSQLDialect
-  scheduler:
-    enable: false
+  application:
+    name: spring-boot-example-service
+  profiles:
+    active: simple
+  boot:
+    admin:
+      client:
+        url: http://localhost:8081/
+        instance:
+          metadata:
+            name: ${spring.security.user.name}
+            password: ${spring.security.user.password}
+            role: ${spring.security.user.role}
   cache:
     cache-names: getTime,currentTimeMillis
     caffeine:
       spec: maximumSize=100,expireAfterWrite=5s
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+scheduler:
+  enable: false
