@@ -1,5 +1,8 @@
 server:
   port: 8080
+info:
+  author: pao.s.w
+  version: 0.0
 spring:
   application:
     name: spring-boot-example-service
@@ -14,6 +17,8 @@ spring:
             name: ${spring.security.user.name}
             password: ${spring.security.user.password}
             role: ${spring.security.user.role}
+            tags:
+              environment: ${simple.environment}
   cache:
     cache-names: getTime,currentTimeMillis
     caffeine:
