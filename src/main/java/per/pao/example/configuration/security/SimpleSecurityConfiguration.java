@@ -13,15 +13,26 @@ public class SimpleSecurityConfiguration extends WebSecurityConfigurerAdapter {
         httpSecurity
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/**").permitAll()
-                .antMatchers("/actuator/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .httpBasic();
+                .antMatchers(SecurityUri.HTTP_PERMIT_URI).permitAll()
+                .antMatchers("/**").authenticated();
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-
+        web.ignoring().antMatchers(SecurityUri.WEB_IGNORING_URI);
     }
+}
+
+class SecurityUri {
+    static final String[] HTTP_PERMIT_URI = {
+            "/api/**",
+            "/oauth/**"
+    };
+    
+    static final String[] WEB_IGNORING_URI = {
+            "/actuator/**",
+            "/swagger-ui/**",
+            "/swagger-resources/**",
+            "/v3/**"
+    };
 }
