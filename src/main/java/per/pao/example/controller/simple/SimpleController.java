@@ -2,7 +2,7 @@ package per.pao.example.controller.simple;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @Api(tags = "Simple")
+@RequiredArgsConstructor
 @RequestMapping(value = "/api")
 @RestController("SimpleController")
 public class SimpleController {
@@ -27,8 +28,7 @@ public class SimpleController {
         return map;
     }
 
-    @Autowired
-    private SimpleRepository simpleRepository;
+    private final SimpleRepository simpleRepository;
 
     @ApiOperation(value = "find all simple data", notes = "none")
     @ResponseStatus(HttpStatus.OK)

@@ -11,7 +11,7 @@ public class SimpleDo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id",columnDefinition = "serial")
+    @Column(name = "id", columnDefinition = "bigserial")
     private Long id;
 
     @Column(name = "name")
