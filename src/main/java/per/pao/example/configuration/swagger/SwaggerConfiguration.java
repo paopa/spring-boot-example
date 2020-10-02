@@ -11,7 +11,8 @@ import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
-import static per.pao.example.configuration.swagger.SwaggerBaseContent.*;
+import static per.pao.example.configuration.swagger.SwaggerConfiguration.SwaggerBaseContent.*;
+
 
 /**
  * url: http://localhost:8080/swagger-ui/index.html
@@ -41,13 +42,14 @@ public class SwaggerConfiguration {
     private Contact generateContact() {
         return new Contact(NAME, WEB, EMAIL);
     }
-}
 
-class SwaggerBaseContent {
-    final static String TITLE = "spring-boot-example";
-    final static String VERSION = "0.1";
-    final static String NAME = "pao.s";
-    final static String WEB = "https://medium.com/@pao.pa";
-    final static String EMAIL = "david840422@gmail.com";
-    final static String DESCRIPTION = "this is a test project";
+    static class SwaggerBaseContent {
+        final static String TITLE = "spring-boot-example";
+        final static String VERSION = "0.1";
+        final static String NAME = "pao.s";
+        final static String WEB = "https://medium.com/@pao.pa";
+        final static String EMAIL = "david840422@gmail.com";
+        final static String DESCRIPTION = "this is a test project";
+    }
+
 }
