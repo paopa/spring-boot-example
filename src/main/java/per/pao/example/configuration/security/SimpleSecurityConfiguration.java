@@ -28,7 +28,7 @@ class SecurityUri {
             "/api/**",
             "/oauth/**"
     };
-    
+
     static final String[] WEB_IGNORING_URI = {
             "/actuator/**",
             "/swagger-ui/**",
