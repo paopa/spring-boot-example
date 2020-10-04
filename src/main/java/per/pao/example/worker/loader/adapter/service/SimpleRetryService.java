@@ -1,4 +1,4 @@
-package per.pao.example.controller.simple.service;
+package per.pao.example.worker.loader.adapter.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.retry.annotation.Backoff;
@@ -9,7 +9,7 @@ import per.pao.example.entity.SimpleDo;
 
 @Slf4j
 @Service
-public class SimpleService {
+public class SimpleRetryService {
 
     private int count = 0;
 
