@@ -18,7 +18,7 @@ import java.util.Map;
 @Api(tags = "Simple")
 @RequiredArgsConstructor
 @RequestMapping(value = "/api")
-@RestController("SimpleController")
+@RestController
 public class SimpleController {
 
     @GetMapping
