@@ -11,4 +11,5 @@ public interface SimpleRepository extends JpaRepository<SimpleDo, Long> {
     @Override
     @RestResource(exported = false)
     void delete(SimpleDo simpleDo);
+
 }

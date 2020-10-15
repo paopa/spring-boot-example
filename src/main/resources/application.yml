@@ -14,11 +14,25 @@ spring:
         url: http://localhost:8081/
         instance:
           metadata:
-            name: ${spring.security.user.name}
-            password: ${spring.security.user.password}
-            role: ${spring.security.user.role}
+            name: ${security.user.name}
+            password: ${security.user.password}
+            role: ${security.user.role}
             tags:
               environment: ${simple.environment}
+  security:
+    user:
+      name: ${security.user.name}
+      password: ${security.user.password}
+      role: ${security.user.role}
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${datasource.url}
+    sql-script-encoding: UTF-8
+    username: ${datasource.username}
+    password: ${datasource.password}
+#  jpa:
+#    properties:
+#      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
   cache:
     cache-names: getTime,currentTimeMillis
     caffeine:
