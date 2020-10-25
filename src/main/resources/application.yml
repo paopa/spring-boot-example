@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8081
 info:
   author: pao.s.w
   version: 0.0
@@ -37,6 +37,15 @@ spring:
     cache-names: getTime,currentTimeMillis
     caffeine:
       spec: maximumSize=100,expireAfterWrite=5s
+  kafka:
+    enable: ${kafka-enable}
+    producer:
+      bootstrap-servers: ${kafka-host}
+    consumer:
+      bootstrap-servers: ${kafka-host}
+      auto-offset-reset: earliest
+      enable-auto-commit: true
+      group-id: ${kafka-group-id}
 management:
   endpoints:
     web:
@@ -45,5 +54,4 @@ management:
   endpoint:
     health:
       show-details: always
-scheduler:
-  enable: false
+scheduler.enable: ${scheduler-enable}

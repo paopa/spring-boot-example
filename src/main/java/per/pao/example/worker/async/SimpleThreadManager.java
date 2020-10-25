@@ -32,7 +32,7 @@ public class SimpleThreadManager {
         }
     }
 
-    @Scheduled(initialDelay = DELAY, fixedDelay = DELAY)
+//    @Scheduled(initialDelay = DELAY, fixedDelay = DELAY)
     public void checkPool() {
         log.info("pool count {}", pool.size());
         pool.forEach(thread -> log.info("Thread Name: {} Status {}", thread.getName(), thread.getState()));
