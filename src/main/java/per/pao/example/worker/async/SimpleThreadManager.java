@@ -12,7 +12,7 @@ import java.util.List;
 public class SimpleThreadManager {
 
     private final List<Thread> pool = new ArrayList<>();
-    private final int DELAY = 2_000;
+    private final int DELAY = 1_000;
 
     public boolean add(Thread thread) {
         try {
@@ -33,8 +33,26 @@ public class SimpleThreadManager {
     }
 
 //    @Scheduled(initialDelay = DELAY, fixedDelay = DELAY)
-    public void checkPool() {
+    public void checkPool() throws InterruptedException {
         log.info("pool count {}", pool.size());
         pool.forEach(thread -> log.info("Thread Name: {} Status {}", thread.getName(), thread.getState()));
+    }
+
+    @Scheduled(initialDelay = DELAY, fixedDelay = DELAY)
+    public void test1() throws InterruptedException {
+        System.out.println("test1 123");
+        Thread.sleep(10000);
+    }
+
+    @Scheduled(initialDelay = DELAY, fixedDelay = DELAY)
+    public void test2() throws InterruptedException {
+        System.out.println("test2 456");
+        Thread.sleep(3000);
+    }
+
+    @Scheduled(initialDelay = DELAY, fixedDelay = DELAY)
+    public void test3() throws InterruptedException {
+        System.out.println("test3 789");
+        Thread.sleep(1000);
     }
 }
