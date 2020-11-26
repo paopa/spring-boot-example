@@ -22,7 +22,7 @@ import java.util.Map;
 @RestController
 public class SimpleController {
 
-    @GetMapping
+    @GetMapping()
     public Map hello() {
         Map map = new HashMap<>();
         map.put("say", "hello");
