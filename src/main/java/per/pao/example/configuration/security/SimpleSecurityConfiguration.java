@@ -13,7 +13,8 @@ public class SimpleSecurityConfiguration extends WebSecurityConfigurerAdapter {
         httpSecurity
                 .authorizeRequests()
                 .antMatchers(SecurityUri.HTTP_PERMIT_URI).permitAll()
-                .antMatchers("/**").authenticated()
+//                .antMatchers("/**").authenticated()
+                .antMatchers("/**").permitAll()
                 .and()
                 .csrf().disable();
     }
