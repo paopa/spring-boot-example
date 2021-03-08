@@ -1,0 +1,13 @@
+server:
+  port: 8081
+spring:
+  profiles:
+    active: simple
+  application:
+    name: spring-boot-example-service
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${datasource.url}
+    sql-script-encoding: UTF-8
+    username: ${datasource.username}
+    password: ${datasource.password}

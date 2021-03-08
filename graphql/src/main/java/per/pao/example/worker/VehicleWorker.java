@@ -1,10 +1,10 @@
-package per.pao.example.worker.graphql;
+package per.pao.example.worker;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import per.pao.example.dao.jpa.graphql.VehicleRepository;
-import per.pao.example.entity.graphql.Vehicle;
+import per.pao.example.dao.VehicleRepository;
+import per.pao.example.entity.Vehicle;
 
 import java.time.LocalDate;
 import java.util.List;

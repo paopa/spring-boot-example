@@ -1,4 +1,4 @@
-package per.pao.example.entity.graphql;
+package per.pao.example.entity;
 
 import lombok.Data;
 

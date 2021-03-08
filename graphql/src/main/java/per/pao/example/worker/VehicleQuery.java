@@ -1,9 +1,9 @@
-package per.pao.example.worker.graphql;
+package per.pao.example.worker;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import per.pao.example.entity.graphql.Vehicle;
+import per.pao.example.entity.Vehicle;
 
 import java.util.List;
 import java.util.Optional;
