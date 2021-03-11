@@ -5,10 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import per.pao.example.dao.jpa.SimpleRepository;
 import per.pao.example.entity.SimpleDo;
 
@@ -35,7 +32,7 @@ public class SimpleController {
     @ApiOperation(value = "find all simple data", notes = "none")
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/v1/simple")
-    public List<SimpleDo> getAll() {
+    public List<SimpleDo> getAll(@RequestParam(value = "a") String a) {
         return simpleRepository.findAll();
     }
 }
