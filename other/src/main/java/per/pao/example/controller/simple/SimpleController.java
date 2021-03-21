@@ -7,6 +7,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import per.pao.example.controller.simple.dto.CustomDto;
 import per.pao.example.controller.simple.dto.TestDto;
 import per.pao.example.controller.simple.vo.TestVo;
 import per.pao.example.dao.jpa.SimpleRepository;
@@ -47,6 +48,13 @@ public class SimpleController {
                 new TestVo(testDto.getName(), testDto.getAge(), testDto.getSub().getSex()),
                 HttpStatus.OK
         );
+    }
+
+    @ApiOperation(value = "test custom valid annotation")
+    @PostMapping("/validation-annotation/custom/test")
+    public ResponseEntity<?> customValidationTest(@Valid @RequestBody CustomDto customDto) {
+        System.out.println(customDto);
+        return null;
     }
 }
 
