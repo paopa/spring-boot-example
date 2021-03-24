@@ -5,6 +5,7 @@ import lombok.Data;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
+import per.pao.example.pojo.Input;
 
 import javax.persistence.*;
 
@@ -22,5 +23,5 @@ public class JsonT {
 
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb")
-    private Object content;
+    private Input content;
 }

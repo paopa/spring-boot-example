@@ -9,24 +9,24 @@ import lombok.ToString;
 
 @Data
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type", visible = true)
-//@JsonSubTypes({
-//        @JsonSubTypes.Type(value = Input.AInput.class, name = "a"),
-//        @JsonSubTypes.Type(value = Input.BInput.class, name = "b")
-//})
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Input.AInput.class, name = "a"),
+        @JsonSubTypes.Type(value = Input.BInput.class, name = "b")
+})
 public abstract class Input {
     private String type;
 
     @EqualsAndHashCode(callSuper = true)
     @Data
     @ToString(callSuper = true)
-    @JsonTypeName(value = "a")
+//    @JsonTypeName(value = "a")
     public static class AInput extends Input {
         private String a;
     }
 
     @EqualsAndHashCode(callSuper = true)
     @Data
-    @JsonTypeName(value = "b")
+//    @JsonTypeName(value = "b")
     public static class BInput extends Input {
         private String b;
     }

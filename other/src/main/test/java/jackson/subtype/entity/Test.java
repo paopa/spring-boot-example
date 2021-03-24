@@ -9,6 +9,8 @@ import per.pao.example.entity.JsonT;
 import per.pao.example.pojo.Input;
 import per.pao.example.util.InputAdapter;
 
+import java.util.Random;
+
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class Test {
 
@@ -20,7 +22,7 @@ public class Test {
         JsonT jsonT = new JsonT();
         Input.AInput aInput = new Input.AInput();
         aInput.setType("a");
-        aInput.setA("123");
+        aInput.setA("123_" + new Random().nextInt());
         jsonT.setContent(aInput);
         jsonTRepository.save(jsonT);
     }
