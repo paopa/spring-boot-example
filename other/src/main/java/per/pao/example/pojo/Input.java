@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Data
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type", visible = true)
@@ -17,6 +18,7 @@ public abstract class Input {
 
     @EqualsAndHashCode(callSuper = true)
     @Data
+    @ToString(callSuper = true)
     @JsonTypeName(value = "a")
     public static class AInput extends Input {
         private String a;
