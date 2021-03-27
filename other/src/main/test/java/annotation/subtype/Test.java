@@ -12,9 +12,9 @@ public class Test {
     public void test() throws InterruptedException {
         String jsonA = "{\"type\":\"a\",\"a\":\"100\"}";
         ObjectMapper mapper = new ObjectMapper();
-        new Reflections("per.pao.example.pojo.")
-                .getTypesAnnotatedWith(JsonTypeName.class)
-                .forEach(mapper::registerSubtypes);
+//        new Reflections("per.pao.example.pojo.")
+//                .getTypesAnnotatedWith(JsonTypeName.class)
+//                .forEach(mapper::registerSubtypes);
 
         try {
             Input.AInput input = (Input.AInput) mapper.readValue(jsonA, Input.class);
