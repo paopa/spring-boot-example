@@ -12,6 +12,7 @@
         <module>graphql</module>
         <module>other</module>
         <module>domain-graph-service</module>
+        <module>rsocket</module>
     </modules>
 
     <parent>
