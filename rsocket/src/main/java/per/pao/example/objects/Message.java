@@ -11,16 +11,15 @@ import java.time.Instant;
 @NoArgsConstructor
 public class Message {
 
-    private String origin;
-    private String interaction;
+    private String message;
     private long index;
     private long created;
 
-    public Message(String origin, String interaction) {
-        this(origin, interaction, 0);
+    public Message(String message) {
+        this(message, 0);
     }
 
-    public Message(String origin, String interaction, long index) {
-        this(origin, interaction, index, Instant.now().getEpochSecond());
+    public Message(String message, long index) {
+        this(message, index, Instant.now().getEpochSecond());
     }
 }

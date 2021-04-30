@@ -11,8 +11,14 @@ import reactor.core.publisher.Mono;
 public class RSocketController {
 
     @MessageMapping("request-response")
-    Mono<Message> requestResponse(final Message request) {
-        log.info("Received request-response request:{}", request);
-        return Mono.just(new Message("server", "response"));
+    Mono<Message> requestResponse(final Message message) {
+        log.info("Received request-response request:{}", message);
+        return Mono.just(new Message("world"));
+    }
+
+    @MessageMapping("fire-and-forget")
+    Mono<Void> fireAndForget(final Message message) {
+        log.info("Received fire-and-forget request:{}", message);
+        return Mono.empty();
     }
 }
