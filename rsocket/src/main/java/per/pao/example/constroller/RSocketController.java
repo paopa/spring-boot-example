@@ -31,4 +31,14 @@ public class RSocketController {
                 .map(index -> new Message("You said: " + message.getMessage() + " Response #" + index))
                 .log();
     }
+
+    @MessageMapping("stream-stream")
+    Flux<Message> channel(final Flux<Integer> settings) {
+        return settings
+                .doOnNext(setting -> System.out.println("Requested interval is {} seconds." + setting))
+                .doOnCancel(() -> System.out.println("This client cancelled this channel."))
+                .switchMap(setting -> Flux.interval(Duration.ofSeconds(setting))
+                        .map(index -> new Message("Stream Response #" + index)))
+                .log();
+    }
 }
