@@ -10,8 +10,12 @@ public class Test {
     @Value("${git.commit.id:na}")
     private String x;
 
+    @Value("${simple.default.value:aaa}")
+    private String defaultValue;
+
     @org.junit.jupiter.api.Test
     public void test() {
         System.out.println(x);
+        System.out.println(defaultValue);
     }
 }
