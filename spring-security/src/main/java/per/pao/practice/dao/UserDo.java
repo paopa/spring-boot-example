@@ -1,9 +1,6 @@
 package per.pao.practice.dao;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.Map;
@@ -12,8 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import static java.util.Objects.isNull;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class UserDo {
 
