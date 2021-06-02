@@ -21,7 +21,7 @@ public class UserDo {
         this(null, username, password);
     }
 
-    interface UserRepository extends IRepository<Integer, UserDo> {
+    public interface UserRepository extends IRepository<Integer, UserDo> {
         UserDo findByUserName(String name);
     }
 }
