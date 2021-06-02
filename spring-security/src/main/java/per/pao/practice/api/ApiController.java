@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.annotation.PreDestroy;
 import java.util.Optional;
 
 @Api(value = "APIv1")
@@ -26,4 +27,8 @@ public class ApiController {
         return ResponseEntity.of(Optional.ofNullable("ok"));
     }
 
+    @PreDestroy
+    public void destroy() {
+        System.out.println("before bean destroy");
+    }
 }
