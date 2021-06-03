@@ -66,6 +66,8 @@ public class WebConfigurerAdapter extends WebSecurityConfigurerAdapter {
                 .and()
                 .addFilterBefore(loginFilter(), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(new AuthenticationFilter(), LoginFilter.class)
+                .addFilterAfter(new AFilter(), BasicAuthenticationFilter.class)
+                .addFilterAfter(new BFilter(), BasicAuthenticationFilter.class)
                 .exceptionHandling()
                 .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
                 .and()
@@ -128,12 +130,35 @@ public class WebConfigurerAdapter extends WebSecurityConfigurerAdapter {
     }
 }
 
+class AFilter extends GenericFilterBean {
+
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        System.out.println(this.getClass().getName() + " start");
+        chain.doFilter(request, response);
+        System.out.println(this.getClass().getName() + " end");
+    }
+}
+
+class BFilter extends GenericFilterBean {
+
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        System.out.println(this.getClass().getName() + " start");
+        chain.doFilter(request, response);
+        System.out.println(this.getClass().getName() + " end");
+    }
+}
+
 class AuthenticationFilter extends GenericFilterBean {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         SecurityContextHolder.getContext()
-                .setAuthentication(new UsernamePasswordAuthenticationToken("principal-yo", "credentials-yo", List.of()));
+                .setAuthentication(new UsernamePasswordAuthenticationToken(
+                        "principal-yo",
+                        "credentials-yo",
+                        List.of()));
         chain.doFilter(request, response);
     }
 }
