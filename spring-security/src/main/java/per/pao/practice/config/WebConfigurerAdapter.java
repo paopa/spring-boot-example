@@ -39,6 +39,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Validation;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
@@ -181,6 +182,10 @@ class LoginFilter extends UsernamePasswordAuthenticationFilter {
             throws AuthenticationException {
         LoginVo loginVo = new ObjectMapper().readValue(request.getInputStream(), LoginVo.class);
         System.out.println(loginVo);
+        Validation.buildDefaultValidatorFactory().getValidator().validate(loginVo)
+                .forEach(action -> {
+                    throw new IllegalArgumentException(action.getPropertyPath() + " " + action.getMessage());
+                });
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(loginVo.getUsername(), loginVo.getPassword());
         setDetails(request, token);
         return this.getAuthenticationManager().authenticate(token);
