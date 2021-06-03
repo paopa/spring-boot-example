@@ -1,6 +1,7 @@
 package per.pao.practice.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -114,7 +115,10 @@ public class WebConfigurerAdapter extends WebSecurityConfigurerAdapter {
         )),
         POST(List.of(
                 "/api/v1/login",
-                "/api/v1/authenticate"
+                "/api/v1/authenticate",
+                "/api/v1/authenticate2",
+                "/api/v1/authenticate3",
+                "/api/v1/authenticate4"
         )),
         PUT(List.of()),
         DELETE(List.of()),
@@ -127,6 +131,12 @@ public class WebConfigurerAdapter extends WebSecurityConfigurerAdapter {
             this(collection.toArray(String[]::new));
         }
 
+    }
+
+    @Data
+    public static class AuthPrinciple {
+        private final String message;
+        private final String description;
     }
 }
 
@@ -156,7 +166,7 @@ class AuthenticationFilter extends GenericFilterBean {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         SecurityContextHolder.getContext()
                 .setAuthentication(new UsernamePasswordAuthenticationToken(
-                        "principal-yo",
+                        new WebConfigurerAdapter.AuthPrinciple("hello ", "principal-yo"),
                         "credentials-yo",
                         List.of()));
         chain.doFilter(request, response);
