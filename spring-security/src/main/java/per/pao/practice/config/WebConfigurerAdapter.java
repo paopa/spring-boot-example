@@ -1,6 +1,7 @@
 package per.pao.practice.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +17,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -23,13 +25,17 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.stereotype.Service;
+import org.springframework.web.filter.GenericFilterBean;
 import per.pao.practice.api.vo.LoginVo;
 import per.pao.practice.dao.UserDo;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -43,7 +49,7 @@ public class WebConfigurerAdapter extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers(HttpMethod.GET, SecurityUri.WEB.uri);
+        web.ignoring().antMatchers(HttpMethod.GET, SecurityUrl.WEB.getUrl());
     }
 
     @Override
@@ -51,14 +57,15 @@ public class WebConfigurerAdapter extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, SecurityUri.GET.uri).permitAll()
-                .antMatchers(HttpMethod.POST, SecurityUri.POST.uri).permitAll()
-                .antMatchers(HttpMethod.PUT, SecurityUri.PUT.uri).permitAll()
-                .antMatchers(HttpMethod.DELETE, SecurityUri.DELETE.uri).permitAll()
-                .antMatchers(HttpMethod.PATCH, SecurityUri.PATCH.uri).permitAll()
+                .antMatchers(HttpMethod.GET, SecurityUrl.GET.getUrl()).permitAll()
+                .antMatchers(HttpMethod.POST, SecurityUrl.POST.getUrl()).permitAll()
+                .antMatchers(HttpMethod.PUT, SecurityUrl.PUT.getUrl()).permitAll()
+                .antMatchers(HttpMethod.DELETE, SecurityUrl.DELETE.getUrl()).permitAll()
+                .antMatchers(HttpMethod.PATCH, SecurityUrl.PATCH.getUrl()).permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .addFilter(loginFilter())
+                .addFilterBefore(loginFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterAfter(new AuthenticationFilter(), BasicAuthenticationFilter.class)
                 .exceptionHandling()
                 .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
                 .and()
@@ -93,27 +100,41 @@ public class WebConfigurerAdapter extends WebSecurityConfigurerAdapter {
     }
 
     @RequiredArgsConstructor
-    private enum SecurityUri {
+    private enum SecurityUrl {
         WEB(List.of(
                 "/swagger-ui/**",
                 "/swagger-resources/**",
                 "/v3/**",
                 "/"
         )),
-        GET(List.of()),
+        GET(List.of(
+                "/api/v1/hello"
+        )),
         POST(List.of(
-                "/api/v1/login"
+                "/api/v1/login",
+                "/api/v1/authenticate"
         )),
         PUT(List.of()),
         DELETE(List.of()),
         PATCH(List.of());
 
-        private final String[] uri;
+        @Getter
+        private final String[] url;
 
-        SecurityUri(Collection<String> collection) {
+        SecurityUrl(Collection<String> collection) {
             this(collection.toArray(String[]::new));
         }
 
+    }
+}
+
+class AuthenticationFilter extends GenericFilterBean {
+
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        SecurityContextHolder.getContext()
+                .setAuthentication(new UsernamePasswordAuthenticationToken("principal-yo", "credentials-yo", List.of()));
+        chain.doFilter(request, response);
     }
 }
 

@@ -3,6 +3,8 @@ package per.pao.practice.api;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +29,7 @@ public class ApiController {
 
     @PostMapping("authenticate")
     public ResponseEntity<String> authenticate() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return ResponseEntity.of(Optional.ofNullable("ok"));
     }
 
