@@ -6,9 +6,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import per.pao.practice.api.vo.LoginVo;
 
 import javax.annotation.PreDestroy;
+import javax.validation.Valid;
 import java.util.Optional;
 
 @Api(value = "APIv1")
@@ -25,6 +28,11 @@ public class ApiController {
     @PostMapping("authenticate")
     public ResponseEntity<String> authenticate() {
         return ResponseEntity.of(Optional.ofNullable("ok"));
+    }
+
+    @PostMapping("login")
+    public ResponseEntity<String> login(@RequestBody @Valid LoginVo loginVo) {
+        return ResponseEntity.ok("get token");
     }
 
     @PreDestroy
