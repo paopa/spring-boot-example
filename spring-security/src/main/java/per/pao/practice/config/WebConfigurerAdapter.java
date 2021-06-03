@@ -65,7 +65,7 @@ public class WebConfigurerAdapter extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(loginFilter(), UsernamePasswordAuthenticationFilter.class)
-                .addFilterAfter(new AuthenticationFilter(), BasicAuthenticationFilter.class)
+                .addFilterBefore(new AuthenticationFilter(), LoginFilter.class)
                 .exceptionHandling()
                 .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
                 .and()
