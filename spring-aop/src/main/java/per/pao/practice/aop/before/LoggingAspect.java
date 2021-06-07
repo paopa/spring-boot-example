@@ -3,10 +3,8 @@ package per.pao.practice.aop.before;
 import lombok.extern.slf4j.Slf4j;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -32,6 +30,16 @@ public class LoggingAspect {
     public void executeLogAfter(JoinPoint jp) {
         Arrays.stream(jp.getArgs())
                 .forEach(arg -> log.info("after method {} arg:{}", jp.getSignature().getName(), arg));
+    }
+
+    @Around(value = "execution(* per.pao.practice.service.Math.multiply(..))")
+    public Object executeLogAround(ProceedingJoinPoint pjp) throws Throwable {
+        long start = System.currentTimeMillis();
+        Object value = pjp.proceed();
+        long end = System.currentTimeMillis();
+        log.info("return value: {}", value);
+        log.info("execute method: {} took {} ms", pjp.getSignature().getName(), (end - start));
+        return value;
     }
 
 }

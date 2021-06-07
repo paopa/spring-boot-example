@@ -1,5 +1,6 @@
 package per.pao.practice.service;
 
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +18,10 @@ public class Math {
         return i1 - i2;
     }
 
+    @SneakyThrows
     public int multiply(int i1, int i2) {
         log.info("do multiply method");
+        Thread.sleep(2000);
         return i1 * i2;
     }
 
