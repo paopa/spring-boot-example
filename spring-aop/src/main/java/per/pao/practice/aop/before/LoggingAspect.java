@@ -21,7 +21,7 @@ public class LoggingAspect {
 
     //    @Before("execution(* per.pao.practice.service.Math.add(..))")
     @Before("log()")
-    public void executeLog(JoinPoint jp) {
+    public void executeLogBefore(JoinPoint jp) {
         String name = jp.getSignature().getName();
         log.info("before method {}", name);
     }
@@ -40,6 +40,13 @@ public class LoggingAspect {
         log.info("return value: {}", value);
         log.info("execute method: {} took {} ms", pjp.getSignature().getName(), (end - start));
         return value;
+    }
+
+    @Before(value = "execution(* per.pao.practice.service.Math.divide(int,int)) && args(i1,i2)", argNames = "jp,i1,i2")
+    public void executeLogParameters(JoinPoint jp, int i1, int i2) {
+        log.info("method: {}", jp.getSignature().getName());
+        log.info("i1: {}", i1);
+        log.info("i2: {}", i2);
     }
 
 }
