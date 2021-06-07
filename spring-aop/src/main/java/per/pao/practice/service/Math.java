@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class Math {
+
     public int add(int i1, int i2) {
         log.info("do add method");
         return i1 + i2;
