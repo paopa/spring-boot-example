@@ -7,6 +7,10 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 import java.util.Arrays;
 
 @Slf4j
@@ -47,6 +51,21 @@ public class LoggingAspect {
         log.info("method: {}", jp.getSignature().getName());
         log.info("i1: {}", i1);
         log.info("i2: {}", i2);
+    }
+
+    @Target(value = {ElementType.METHOD})
+    @Retention(value = RetentionPolicy.RUNTIME)
+    public @interface Log {
+
+    }
+
+    @Around(value = "execution(public double per.pao.practice.service.Math.pow(..))")
+    public Object executeLogAnnotation(ProceedingJoinPoint pjp) throws Throwable {
+        log.info("start method: {}", pjp.getSignature().getName());
+        Arrays.stream(pjp.getArgs()).forEach(arg -> log.info("arg: {}", arg));
+        Object value = pjp.proceed();
+        log.info("end method: {}", pjp.getSignature().getName());
+        return value;
     }
 
 }
