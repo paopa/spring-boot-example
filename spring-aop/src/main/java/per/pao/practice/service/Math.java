@@ -3,6 +3,7 @@ package per.pao.practice.service;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import per.pao.practice.aop.log.LoggingAspect;
 
 @Slf4j
 @Service
@@ -30,7 +31,8 @@ public class Math {
         return i1 / i2;
     }
 
-    public double pow(double i1, int i2) {
+    @LoggingAspect.Log
+    public double pow(double i1, double i2) {
         return java.lang.Math.pow(i1, i2);
     }
 }
