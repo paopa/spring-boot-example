@@ -43,4 +43,12 @@ public class MathTest {
         int actual = this.math.divide(4, 2);
         Assertions.assertEquals(expect, actual);
     }
+
+    @Test
+    @DisplayName("pow test")
+    public void pow() {
+        double expect = 4;
+        double actual = this.math.pow(2, 2);
+        Assertions.assertEquals(expect, actual);
+    }
 }

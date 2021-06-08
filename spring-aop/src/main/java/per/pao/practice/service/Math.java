@@ -29,4 +29,8 @@ public class Math {
         log.info("do divide method");
         return i1 / i2;
     }
+
+    public double pow(double i1, int i2) {
+        return java.lang.Math.pow(i1, i2);
+    }
 }
