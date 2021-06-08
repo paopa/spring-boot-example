@@ -1,4 +1,4 @@
-package per.pao.practice.aop.before;
+package per.pao.practice.aop.log;
 
 import lombok.extern.slf4j.Slf4j;
 
