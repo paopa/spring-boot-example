@@ -103,6 +103,11 @@ public class WebConfigurerAdapter extends WebSecurityConfigurerAdapter {
         }});
     }
 
+    /**
+     * URL regex expression can see
+     * @see AntPathRequestMatcher
+     * @see org.springframework.util.AntPathMatcher
+     */
     @RequiredArgsConstructor
     private enum SecurityUrl {
         WEB(List.of(
@@ -116,10 +121,7 @@ public class WebConfigurerAdapter extends WebSecurityConfigurerAdapter {
         )),
         POST(List.of(
                 "/api/v1/login",
-                "/api/v1/authenticate",
-                "/api/v1/authenticate2",
-                "/api/v1/authenticate3",
-                "/api/v1/authenticate4"
+                "/api/v1/authenticate/*"
         )),
         PUT(List.of()),
         DELETE(List.of()),
